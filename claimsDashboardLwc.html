@@ -1,0 +1,32 @@
+<template>
+ <lightning-card title="My Assigned Claims Dashboard"
+icon-name="standard:claim">
+ <div class="slds-m-around_medium">
+ <lightning-combobox
+ name="policyFilter"
+ label="Filter by Policy Type"
+ value="All"
+ options={policyTypeOptions}
+ onchange={handleFilterChange}
+ class="slds-m-bottom_medium"
+ ></lightning-combobox>
+ <template if:true={visibleClaims}>
+ <div class="slds-grid slds-wrap slds-grid_pull-padded">
+ <template for:each={visibleClaims} for:item="claim">
+ <div key={claim.claimId} class="slds-col
+slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3
+slds-p-horizontal_small">
+ <c-claim-tile-lwc
+claim-data={claim}></c-claim-tile-lwc>
+ </div>
+ </template>
+ </div>
+ <p class="slds-m-top_medium slds-text-heading_small">Total
+Claims Assigned: {visibleClaims.length}</p>
+ </template>
+ <template if:false={visibleClaims}>
+ <p>No claims currently assigned to you.</p>
+ </template>
+ </div>
+ </lightning-card>
+</template>
